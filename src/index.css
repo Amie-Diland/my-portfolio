@@ -2,23 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --bg: #030712;
-  --card: #111827;
-  --glow: #3b82f6;
-  --accent: #2563eb;
-  --accent2: #7c3aed;
-  --text: #94a3b8;
-  --heading: #f8fafc;
-}
+@layer base {
+  :root {
+    --bg: 3 7 18;
+    --card: 17 24 39;
+    --glow: 59 130 246;
+    --accent: 37 99 235;
+    --accent2: 124 58 237;
+    --text: 148 163 184;
+    --heading: 248 250 252;
+  }
 
-html {
-  scroll-behavior: smooth;
-  background-color: #030712; /* Explicit fallback */
-}
+  html {
+    scroll-behavior: smooth;
+    background-color: rgb(var(--bg));
+  }
 
-body {
-  @apply bg-bg text-text antialiased;
+  body {
+    @apply bg-bg text-text antialiased;
+  }
 }
 
 .container {

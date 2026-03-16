@@ -4,13 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg: 'var(--bg)',
-        card: 'var(--card)',
-        glow: 'var(--glow)',
-        accent: 'var(--accent)',
-        accent2: 'var(--accent2)',
-        text: 'var(--text)',
-        heading: 'var(--heading)',
+        bg: 'rgb(var(--bg) / <alpha-value>)',
+        card: 'rgb(var(--card) / <alpha-value>)',
+        glow: 'rgb(var(--glow) / <alpha-value>)',
+        accent: 'rgb(var(--accent) / <alpha-value>)',
+        accent2: 'rgb(var(--accent2) / <alpha-value>)',
+        text: 'rgb(var(--text) / <alpha-value>)',
+        heading: 'rgb(var(--heading) / <alpha-value>)',
       },
       boxShadow: {
         glow: '0 0 50px rgba(0, 209, 255, 0.45)',
