@@ -2,10 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body,
-#root {
-  height: 100%;
+:root {
+  --bg: #030712;
+  --card: #111827;
+  --glow: #3b82f6;
+  --accent: #2563eb;
+  --accent2: #7c3aed;
+  --text: #94a3b8;
+  --heading: #f8fafc;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #030712; /* Explicit fallback */
 }
 
 body {
@@ -13,20 +22,30 @@ body {
 }
 
 .container {
-  @apply max-w-7xl mx-auto px-4;
+  @apply max-w-6xl mx-auto px-6;
 }
 
 .glass {
-  @apply bg-card/80 backdrop-blur-xs shadow-inset shadow-glow rounded-3xl;
+  @apply bg-card/60 backdrop-blur-md border border-white/5 shadow-xl;
 }
 
 .heading {
-  @apply font-display text-heading;
+  @apply font-display text-heading tracking-tight;
 }
 
 .gradient-text {
-  background: linear-gradient(90deg, #00d1ff 0%, #8b5cf6 50%, #3b82f6 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-violet-400;
+}
+
+.section-padding {
+  @apply py-24;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

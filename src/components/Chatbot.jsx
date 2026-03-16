@@ -19,12 +19,15 @@ function reply(q) {
 
 export default function Chatbot() {
   const [open, setOpen] = useState(false)
-  const [messages, setMessages] = useState([{ role: 'ai', text: 'Hi! I’m your assistant. Ask me about my skills or projects.' }])
+  const [messages, setMessages] = useState([{ role: 'ai', text: 'Hi! I’m your AI assistant. How can I help you today?' }])
   const [input, setInput] = useState('')
   const endRef = useRef(null)
-  useEffect(() => { endRef.current?.scrollIntoView({ behavior: 'smooth' }) }, [messages, open])
-  const MotionButton = motion.button
-  const MotionDiv = motion.div
+  
+  useEffect(() => { 
+    if (open) {
+      endRef.current?.scrollIntoView({ behavior: 'smooth' }) 
+    }
+  }, [messages, open])
 
   const send = () => {
     if (!input.trim()) return
@@ -35,26 +38,72 @@ export default function Chatbot() {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
-      <MotionButton whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }} onClick={() => setOpen(o => !o)} className="px-4 py-3 rounded-full bg-accent text-white shadow-glow">
-        {open ? 'Close' : 'Ask AI'}
-      </MotionButton>
+    <div className="fixed bottom-24 right-6 z-50 md:bottom-8 md:right-8">
+      <motion.button 
+        whileHover={{ scale: 1.05 }} 
+        whileTap={{ scale: 0.95 }} 
+        onClick={() => setOpen(o => !o)} 
+        className="w-14 h-14 rounded-2xl bg-accent text-white shadow-xl shadow-accent/20 flex items-center justify-center relative overflow-hidden group"
+      >
+        <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+        {open ? (
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        ) : (
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+        )}
+      </motion.button>
+
       {open && (
-        <MotionDiv initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mt-3 w-80 max-h-[60vh] rounded-2xl bg-card ring-1 ring-glow/40 shadow-glow flex flex-col">
-          <div className="px-4 py-3 text-heading border-b border-glow/20">Assistant</div>
-          <div className="flex-1 overflow-auto px-4 py-3 space-y-2">
+        <motion.div 
+          initial={{ opacity: 0, y: 20, scale: 0.95 }} 
+          animate={{ opacity: 1, y: 0, scale: 1 }} 
+          className="absolute bottom-20 right-0 w-[350px] h-[500px] rounded-[2rem] bg-card border border-white/10 shadow-2xl flex flex-col overflow-hidden backdrop-blur-xl"
+        >
+          <div className="px-6 py-5 bg-white/5 border-b border-white/5 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              <span className="text-heading font-bold">AI Assistant</span>
+            </div>
+          </div>
+
+          <div className="flex-1 overflow-auto px-6 py-6 space-y-6 scrollbar-hide">
             {messages.map((m, i) => (
-              <div key={i} className={`text-sm ${m.role === 'ai' ? 'text-slate-300' : 'text-slate-200'} ${m.role === 'ai' ? '' : 'text-right'}`}>
-                <span className={`inline-block px-3 py-2 rounded-xl ${m.role === 'ai' ? 'bg-[rgba(18,26,46,0.7)] ring-1 ring-glow/30' : 'bg-accent text-white'}`}>{m.text}</span>
-              </div>
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                key={i} 
+                className={`flex ${m.role === 'ai' ? 'justify-start' : 'justify-end'}`}
+              >
+                <div className={`max-w-[80%] px-4 py-3 rounded-2xl text-sm leading-relaxed ${
+                  m.role === 'ai' 
+                    ? 'bg-white/5 text-text rounded-tl-none border border-white/5' 
+                    : 'bg-accent text-white rounded-tr-none shadow-lg shadow-accent/10'
+                }`}>
+                  {m.text}
+                </div>
+              </motion.div>
             ))}
             <div ref={endRef} />
           </div>
-          <div className="p-3 flex gap-2 border-t border-glow/20">
-            <input value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && send()} placeholder="Ask about skills, projects..." className="flex-1 rounded-xl bg-card px-3 py-2 text-text ring-1 ring-glow/30 focus:outline-none" />
-            <button onClick={send} className="px-3 py-2 rounded-xl bg-accent text-white">Send</button>
+
+          <div className="p-4 bg-white/5 border-t border-white/5">
+            <div className="relative flex items-center">
+              <input 
+                value={input} 
+                onChange={(e) => setInput(e.target.value)} 
+                onKeyDown={(e) => e.key === 'Enter' && send()} 
+                placeholder="Type a message..." 
+                className="w-full rounded-xl bg-bg/50 px-5 py-3 text-sm text-heading border border-white/5 focus:border-accent/50 focus:outline-none transition-colors pr-12" 
+              />
+              <button 
+                onClick={send} 
+                className="absolute right-2 p-2 text-accent hover:text-white transition-colors"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"/></svg>
+              </button>
+            </div>
           </div>
-        </MotionDiv>
+        </motion.div>
       )}
     </div>
   )

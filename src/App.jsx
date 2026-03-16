@@ -4,7 +4,6 @@ import Chatbot from './components/Chatbot.jsx'
 import Hero from './sections/Hero.jsx'
 import WhyMe from './sections/WhyMe.jsx'
 import Skills from './sections/Skills.jsx'
-import Portfolio from './sections/Portfolio.jsx'
 import Projects from './sections/Projects.jsx'
 import Services from './sections/Services.jsx'
 import Education from './sections/Education.jsx'
@@ -14,24 +13,31 @@ import cvFile from './assets/CV/NEW CV.docx?url'
 
 export default function App() {
   return (
-    <div>
+    <div className="bg-bg text-text min-h-screen">
       <BackgroundFX />
       <Sidebar />
-      <Hero />
-      <WhyMe />
-      <Skills />
-      <Services />
-      <Portfolio />
-      <Projects />
-      <Education />
-      <Languages />
-      <Contact />
-      <section id="download" className="container pb-24">
-        <div className="glass p-8 md:p-12 flex items-center justify-between">
-          <div className="text-slate-300">Always learning and improving.</div>
-          <a href={cvFile} download className="px-5 py-3 rounded-xl bg-accent text-white shadow-glow">Download CV</a>
+      <main>
+        <Hero />
+        <WhyMe />
+        <Skills />
+        <Services />
+        <Projects />
+        <Education />
+        <Languages />
+        <Contact />
+      </main>
+      
+      <footer className="container pb-40 pt-10 text-center text-sm text-text/40 border-t border-white/5">
+        <div className="flex flex-col items-center gap-4">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-[1px] bg-white/10" />
+            <span>Always learning and improving</span>
+            <div className="w-8 h-[1px] bg-white/10" />
+          </div>
+          <p>© 2026 AMIE DILAND. All rights reserved.</p>
         </div>
-      </section>
+      </footer>
+      
       <Chatbot />
     </div>
   )

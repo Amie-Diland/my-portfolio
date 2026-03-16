@@ -3,14 +3,11 @@ import { useEffect, useState } from 'react'
 import profileImg from '../assets/profile/WhatsApp Image 2026-03-15 at 01.41.13.jpeg'
 
 export default function Hero() {
-  const MotionDiv = motion.div
-  const MotionH1 = motion.h1
-  const MotionP = motion.p
-  const fullText = 'Software Engineer, App Developer, Photoshop Designer, and Teacher. Skilled with Flutter, Dart, HTML, SQL, CSS, PHP, with some C++.'
+  const fullText = 'Software Engineer, App Developer, Photoshop Designer, and Teacher.'
   const [typed, setTyped] = useState('')
   useEffect(() => {
     let i = 0
-    const speed = 18
+    const speed = 30
     const id = setInterval(() => {
       i += 1
       setTyped(fullText.slice(0, i))
@@ -18,49 +15,93 @@ export default function Hero() {
     }, speed)
     return () => clearInterval(id)
   }, [])
+
   return (
-    <section id="home" className="container pt-24 pb-16">
-      <div className="glass p-8 md:p-12 flex flex-col md:flex-row items-center gap-10 relative overflow-hidden">
-        <MotionDiv
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="relative"
+    <section id="home" className="container pt-32 pb-24 min-h-[90vh] flex items-center">
+      <div className="grid md:grid-cols-2 gap-16 items-center">
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-left"
         >
-          <MotionDiv
-            className="absolute inset-0 rounded-full ring-2 ring-glow/70 animate-spinSlow"
-          />
-          <MotionDiv
-            className="absolute -inset-3 rounded-full blur-2xl opacity-40"
-            style={{ background: 'conic-gradient(from 180deg at 50% 50%, rgba(0,209,255,0.4), rgba(139,92,246,0.4), rgba(59,130,246,0.4), rgba(0,209,255,0.4))' }}
-            animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-          />
-          <MotionDiv
-            animate={{ y: [0, -10, 0, -6, 0], rotate: [0, -3, 0, 3, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-            className="relative"
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-accent font-mono mb-4 flex items-center gap-2"
           >
-            <img src={profileImg} alt="" className="w-44 h-44 rounded-full ring-2 ring-glow shadow-glow object-cover" />
-          </MotionDiv>
-        </MotionDiv>
-        <div className="flex-1 text-left">
-          <MotionH1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="heading text-4xl md:text-6xl mb-4">
-            Hi, I’m <span className="gradient-text">AMIE DILAND</span>
-          </MotionH1>
-          <MotionP initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="text-lg md:text-xl text-slate-300 max-w-2xl min-h-[3.5rem]">
-            {typed}
-          </MotionP>
-          <div className="mt-8 flex gap-4">
-            <a href="#projects" className="px-5 py-3 rounded-xl bg-accent text-white shadow-glow">View My Work</a>
-            <a href="#contact" className="px-5 py-3 rounded-xl bg-card text-text ring-1 ring-glow">Contact Me</a>
+            <span className="w-8 h-[2px] bg-accent" />
+            <span>Available for new projects</span>
+          </motion.div>
+          <motion.h1 className="heading text-5xl md:text-7xl mb-6 font-bold leading-[1.1]">
+            Creating digital <br />
+            <span className="gradient-text">experiences</span> that matter.
+          </motion.h1>
+          <motion.p className="text-xl text-text max-w-xl mb-10 leading-relaxed min-h-[3rem]">
+            I’m <span className="text-heading font-medium">AMIE DILAND</span>, a {typed}
+            <span className="inline-block w-[2px] h-5 bg-accent ml-1 animate-pulse" />
+          </motion.p>
+          <div className="flex flex-wrap gap-5">
+            <motion.a
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              href="#projects"
+              className="px-8 py-4 rounded-full bg-accent text-white font-medium shadow-lg shadow-accent/25 flex items-center gap-2"
+            >
+              View Projects
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </motion.a>
+            <motion.a
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              href="#contact"
+              className="px-8 py-4 rounded-full border border-white/10 hover:bg-white/5 text-heading font-medium transition-colors"
+            >
+              Contact Me
+            </motion.a>
           </div>
-        </div>
-        <MotionDiv
-          className="absolute -top-10 -right-10 w-64 h-64 rounded-full blur-3xl opacity-30"
-          style={{ background: 'radial-gradient(200px circle at center, rgba(0,209,255,0.6), transparent 70%)' }}
-          animate={{ x: [0, -10, 10, 0], y: [0, 8, -6, 0] }}
-          transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-        />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: 'easeOut' }}
+          className="relative flex justify-center md:justify-end"
+        >
+          <div className="relative w-64 h-64 md:w-80 md:h-80">
+            {/* Animated Ring */}
+            <motion.div 
+              animate={{ rotate: 360 }}
+              transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
+              className="absolute inset-0 rounded-full border-2 border-dashed border-accent/30"
+            />
+            
+            {/* Profile Image Container */}
+            <div className="absolute inset-4 rounded-full overflow-hidden border-4 border-card shadow-2xl z-10 bg-card">
+              <img
+                src={profileImg}
+                alt="AMIE DILAND"
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-110 hover:scale-100"
+              />
+            </div>
+
+            {/* Decorative Glow */}
+            <div className="absolute inset-0 bg-accent/20 blur-[60px] rounded-full -z-10 animate-pulse" />
+
+            {/* Experience Badge */}
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute -bottom-2 -right-2 md:bottom-4 md:right-4 bg-accent backdrop-blur-xl rounded-2xl border border-white/20 px-5 py-3 shadow-xl z-20"
+            >
+               <div className="text-center">
+                  <div className="text-xl font-bold text-white leading-none">5+</div>
+                  <div className="text-[10px] text-white/80 uppercase tracking-widest font-bold">Years Exp</div>
+               </div>
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
     </section>
   )
