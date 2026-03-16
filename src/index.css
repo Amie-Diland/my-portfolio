@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-bg text-text antialiased;
+}
+
+.container {
+  @apply max-w-7xl mx-auto px-4;
+}
+
+.glass {
+  @apply bg-card/80 backdrop-blur-xs shadow-inset shadow-glow rounded-3xl;
+}
+
+.heading {
+  @apply font-display text-heading;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #00d1ff 0%, #8b5cf6 50%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
